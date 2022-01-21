@@ -1,0 +1,12 @@
+ * Une classe est définie comme abstraite avec le mot clé abstract.
+ * Les classes abstraites sont à utiliser lorsqu'une classe mère ne doit pas être instanciée.
+ * Une classe abstraite ne peut donc pas être instanciée.
+ * Une classe abstraite n'est pas obligée de contenir de méthode abstraite.
+ * Si une classe contient une méthode abstraite, cette classe doit alors être déclarée abstraite.
+ * Une méthode abstraite n'a pas de corps.
+ * Une interface est une classe 100 % abstraite.
+ * Aucune méthode d'une interface n'a de corps.
+ * Une interface sert à définir un supertype et à utiliser le polymorphisme.
+ * Une interface s'implémente dans une classe en utilisant le mot clé implements.
+ * Vous pouvez implémenter autant d'interfaces que vous voulez dans vos classes.
+ * Vous devez redéfinir toutes les méthodes de l'interface (ou des interfaces) dans votre classe.

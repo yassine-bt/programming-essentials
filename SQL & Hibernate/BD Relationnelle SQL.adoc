@@ -1,0 +1,167 @@
+* Qu'est ce qu'une clé?
+
+-----------------
+"Une clé de relation est un attribut ou un ensemble d'attribut identifiant un tuple (une 
+ligne) de manière unique."
+-----------------
+
+* Qu'est ce qu'une jointure?
+
+-----------------
+la jointure est une opération qui revient à effectuer un produit cartésien des
+enregistrements de deux tables suivi d'un filtrage permettant de conserver les
+enregistrement des deux tables selon un critère de jointure choisi.
+-----------------
+
+* Donnez différents exemples de jointures
+
+-----------------
+"Exemples de jointures internes:
+**NATURAL JOIN: jointure entre deux tables suivant une colonne de nom commun.
+ Il est inutile de définir le critère de jointure dans la requête,
+ elle est déclarée implicitement.
+ 
+**INNER JOIN: même définition que la précédente, excepté que le critère 
+de jointure doit être explicitement défini dans la requête
+
+Exemples de jointures externes:
+**LEFT OUTER JOIN, RIGHT OUTER JOIN, FULL OUTER JOIN
+rapatrie tous les enregistrements de la table mère (défini selon le sens de la jointure)
+ainsi que ceux de la table fille correspondant au critère de jointure 
+(ceux n'y correspondant pas sont remplacés par des valeurs nulles)"
+-----------------
+
+* Qu'est ce qu'un index?
+
+-----------------
+objet de la base de données dédié à l'optimisation des tables
+-----------------
+
+* Quels sont ses avantages et inconvénients?
+
+-----------------
+"Avantage:
+- permet de faire un gain de performance en lecture (select)
+Inconvénients:
+- dégrade les performances en écriture (insertion et mise à jour) car possibilité 
+de reconstruction de l'index suite à l'une de ces opérations.
+- structure occupant de l'espace en base de données"
+-----------------
+
+* "Citez différents types d'index et décrivez succintement leur fonctionnement"
+
+-----------------
+"Exemples de types d'index:
+- index B*Tree (index utilisé par défaut dans ORACLE): index contenant des valeurs de clé
+ dans une structure arborescente. Il effectue un parcours des différents blocs suivant 
+ un algorithme afin de trouver la feuille contenant le rowID pointant vers l'enregistrement souhaité.
+ 
+- index Bitmap: index correspondant à un masque de bits pour les valeurs de colonnes indexées.
+ Des ET et OU binaires permettent de faire des tests d'égalité."
+-----------------
+
+* Dans quel cas employer l'un ou l'autre?
+
+-----------------
+Les index Bitmap sont adaptés à la manipulation de colonnes contenant des valeurs peu distinctes 
+et aux requêtes contenant des prédicats d'égalité.  
+Ils gèrent également mieux les valeurs NULL que les index B*Tree.
+-----------------
+
+* Qu'est ce qu'un plan d'exécution?
+
+-----------------
+Un plan d'exécution est l'expression par le SGBDR de la méthode d'accès aux données
+ pour répondre à une requête, Il présente la liste des opérations qui vont être effectuées 
+ lors de l'exécution de la requête.
+-----------------
+
+* Citez des exemples d'éléments que l'on trouve dans un plan d'exécution
+
+-----------------
+"Exemples d'éléments:
+- FULL TABLE SCAN:  la table est parcourue (scannée) entièrement, de façon linéaire,
+ dans l’ordre le plus simple, c’est-à-dire l’ordre des blocs dans le tablespace.
+- PARTITION: Opération effectuée sur des partitions et non sur la table entière, 
+spécifique de la manipulation de tables partitionnées.
+- INDEX FULL SCAN: Parcourt un index en entier en respectant l’ordre de l’index.
+- HASH JOIN: opération de jointure construisant une table de hachage permettant 
+d’accéder plus rapidement aux clés,"
+-----------------
+
+* Sur quoi s'appuie le SGBD pour effectuer un plan d'exécution?
+
+-----------------
+"Il s'appuie sur les statistiques qui contiennent l'ensemble des informations relatives 
+aux tables, index et colonnes comme par exemple:
+- nombre d'enregistrements
+- l'espace occupé en blocs
+- la taille moyenne d'un enregistrement
+- le nombre de valeurs distinctes et nulles..."
+-----------------
+
+* Qu'est ce qu'une vue?
+
+-----------------
+Une vue est une table virtuelle définit par une requête
+-----------------
+
+* Qu'est ce qu'une vue matérialisée?
+
+-----------------
+Les vues matérialisées sont des tables qui contiennent des données agrégées ou jointées 
+issues d’autres tables. Elles sont définies par des requêtes, comme les vues, mais stockent 
+les données comme les tables.
+-----------------
+
+* Quelles sont les principales différences entre les deux notions?
+
+-----------------
+La requête liée à une vue matérialisée n'est pas recalculée à chaque appel contrairement à une vue "classique"
+-----------------
+
+* Qu'est ce que le partitionnement?
+
+-----------------
+"Le partitionnement permet de diviser une grosse table en morceaux physiquement
+plus petits (les partitions), tout en gardant la vision logique d’une grosse table"
+-----------------
+
+* Quel est son intérêt?
+
+-----------------
+Il permet d'augmenter la disponibilité des données en permettant d'effectuer 
+des opérations de maintenance sur les partitions individuellement.
+-----------------
+
+* Qu'est ce qu'une procédure stockée?
+
+-----------------
+une procédure stockée est un ensemble d'instructions SQL pré-compilées, stockées dans une base de données 
+et exécutées sur demande par le SGBD qui manipule la base de données
+-----------------
+
+* Quel est son intérêt?
+
+-----------------
+toutes tes requêtes sont entièrement exécutées sur le serveur, seuls les résultats finaux sont envoyés au client.
+Ainsi,les problèmes de latence et de bande passante sont minimisés. 
+De plus, les procédures étant pré-compilées, elles seront exécutés plus rapidement 
+par le serveur par rapport à une requête créée et envoyée par un client.
+-----------------
+
+* Qu'est ce qu'un trigger?
+
+-----------------
+Un trigger est un bloc PL/SQL associé à une table ou une vue s'exécutant lorsqu'une opération 
+du langage de manipulation de données est effectuée sur ladite table ou vue.
+-----------------
+
+* Qu'est ce qu'un hint Oracle?
+
+-----------------
+"Les hints sont des conseils que l’on donne à l’optimiseur
+pour l’orienter dans le choix d’un plan d’exécution. Ce dernier sera du coup différent
+de celui qu’il aurait choisi normalement en estimant que c’était le moins coûteux
+pour exécuter la requête demandée"
+-----------------

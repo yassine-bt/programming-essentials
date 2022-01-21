@@ -1,0 +1,66 @@
+ * "Connaissez-vous les principes SOLID ? si oui, pouvez-vous me citer les définitions ?"
+-----------------
+SRP : Single Responsability Principle
+Un module / fontion s'occupe uniquement d'un seul et unique fonctionnalité.
+Une seule raison d'être et d'être modifié ! :)
+
+OCP : Open - Closed Principle
+Open for extension , closed for modification
+utiliser les abstractions afin de ne pas changer le code si on veut ajouter
+un nouvel objet ou changer un comportement
+
+LSP : Liskov Substitution Principle
+L'héritage doit uniquement être utilisé pour un besoin de substitution
+si un objet O1 de la classe C1 et un O2 de la classe C2
+si dans un programme P1 on se comporte avec o1 comme avec o2
+et bein on a intérêt que C2 hérite de C1 ou que C1 et C2 héritent de C.
+
+ISP : Interface Segregation Principle
+L'interface doit être assez fine, pour qu'une classe ne doit pas implémenter
+des méthodes dont elle n'en a pas besoin
+
+DIP : Dependency Inversion Principle
+L'abstraction ne dépend jamais des détails, les détails dépendent de l'abstraction.
+----------------- 
+
+ * "Connaissez vous l'immutabilité ? si oui, à quoi ça sert ?"
+-----------------
+c'est le fait qu'un object, une fois créé, il est impossible de le modifier.
+ça sert à éviter les "side effects" en cas d'accès multithreadé à cet object par exemple.
+ceci etant dit, ca permet d'avoir un traitement purement fonctionnel et pas impératif.
+Si toutes les fontions accèdent à un object immutables et ne changent pas l'état de l'objet,
+c'est que nous avons réaliser le déterminisme de la programmation fontionnelle :  en répétant 
+le même programme avec le mêmes inputs, on aura les mêmes résultats.
+-----------------
+
+ * Dans la pratique du TDD, comment procédez-vous ?
+-----------------
+- ecrire des tests non passants
+- ecrire du code jusqu'à ce que ça passe
+-----------------
+ 
+ * "Qu'avez vous compris du DDD ?"
+-----------------
+
+-----------------
+ 
+ * "Connaissez vous des algo ?"
+ 
+ * "Faites-vous de la veille technique ? Sur quel sujet ?"
+
+ * "Quelles sont les nouveautés de JAVA 8 ?"
+
+ * "Comment implémentez-vous l'immutabilité ?"
+----------------- 
+-Don't provide "setter" methods — methods that modify fields or objects referred to by fields. 
+Make all fields final and private. 
+-Don't allow subclasses to override methods. 
+The simplest way to do this is to declare the class as final.
+-A more sophisticated approach is to make the constructor private and construct instances in factory methods. 
+-If the instance fields include references to mutable objects, don't allow those objects to be changed: 
+-Don't provide methods that modify the mutable objects. 
+-Don't share references to the mutable objects.
+Never store references to external, mutable objects passed to the constructor; 
+if necessary, create copies, and store references to the copies.
+Similarly, create copies of your internal mutable objects when necessary to avoid returning the originals in your methods. 
+-----------------

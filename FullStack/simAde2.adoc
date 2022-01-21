@@ -1,0 +1,150 @@
+* SOAP VS REST ?
+-----------------
+SOAP est un protocol, quand à REST est une architecture
+SOAP supporte uniquement du XML, REST supporte JSON, XML etc..
+SOAP dépend d'un standard UUID (WSDL), REST est dynamique
+A client is supposed to enter a REST service with zero knowledge of the API,
+except for the entry point and the media type.
+In SOAP, the client needs previous knowledge on everything it will be using,
+or it won't even begin the interaction
+REST APIs must be hypertext-driven.
+REST is stateless, SOAP could be statefull
+-----------------
+
+* REST 
+-----------------
+Representational State Transfer
+Les objets sont considérés par des URI
+Les protocle utilisé est HTTP
+La manipulation des ressources se fait par verbe 
+-----------------
+
+* RESTFUL 
+-----------------
+it's a REST architecture respecting all REST constraints :
+GET and PUT are idempotent
+GET resources/{id}
+STATELESS...
+-----------------
+
+* REST maturity Levels ?
+-----------------
+0 . use of HTTP
+1 . use of ressources
+2 . use of VERBS
+3 . use of HYPERLINKS
+-----------------
+
+* HASHCODE ?
+-----------------
+c'est le resultat d'une fonction de hashage
+retourne une valeur decrivant un objet essayant de l'indentifier
+par défaut, le hashcode est l'emplacement memoire de ce dernier
+On peut avoir une collision.
+par conséquent, il faut implémenter hashcode à chaque fois qu'on redéfinit
+equals pour garantir : deux objets égaux, doivent avoir le meme hashcode.
+-----------------
+
+* Quels sont les différents états d'un object en hibernate ?
+-----------------
+Transient : un objet fraichement instancié, ne correspond en rien dans la bd
+Persistant : il est persisté
+Detached : de la session, libre de sa correlation dans le modele relationnel
+suite  a la fermeture de la session.
+-----------------
+
+
+* Citez des design pattern 
+-----------------
+Strategy, Oberver, Builder...	
+-----------------
+
+* Ecrivez strategy en java 8 
+-----------------
+
+public interface EndOfSubscriptionStrategy {
+
+    LocalDate comptueEndOfSubscription(LocalDate subscriptionStartDate);
+
+    static  EndOfSubscriptionStrategy monthly(){
+        return  (LocalDate subscriptionStartDate) -> subscriptionStartDate.plusMonths(1);
+    }
+
+    static  EndOfSubscriptionStrategy yearly(){
+        return subscriptionStartDate -> subscriptionStartDate.plusYears(1);
+    }
+}
+ class StrategyTest{
+    public  static void main(String ...args){
+       System.out.print(EndOfSubscriptionStrategy.monthly().comptueEndOfSubscription( LocalDate.now()).toString());
+    }
+OU 
+
+public enum Periodicity {
+	
+	MONTHLY(SubscriptionFeatures::computeMonthlyEndDate),
+	YEARLY(SubscriptionFeatures::computeYearlyEndDate),
+	NONE(SubscriptionFeatures::computeFreePlanEndDate); 
+
+	public final BiFunction<SubscriptionFeatures, LocalDate, LocalDate> computeEndDateAlgo; 
+	
+	private Periodicity( BiFunction<SubscriptionFeatures, LocalDate, LocalDate> algo) {
+		this.computeEndDateAlgo = algo;
+	}
+}
+
+} 
+-----------------
+
+* Qu'est ce qu'une lambda 
+-----------------
+Une expression lambda est une fonction anonyme : sa définition se fait sans déclaration
+explicite du type de retour, ni de modificateurs d'accès ni de nom. 
+C'est un raccourci syntaxique qui permet de définir une méthode directement
+à l'endroit où elle est utilisée.
+(paramètres) -> expression;
+(paramètres) -> { traitements; }
+-----------------
+
+* Qu'est ce qu'une interface fonctionnelle
+-----------------
+Une interface fonctionnelle (functional interface) est basiquement une interface dans
+laquelle une seule méthode abstraite est définie. Elle doit respecter certaines contraintes :
+-elle ne doit avoir qu'une seule méthode déclarée abstraite
+-les méthodes définies dans la classe Object ne sont pas prises en compte comme étant des méthodes abstraites
+-toutes les méthodes doivent être public
+-elle peut avoir des méthodes par défaut et static
+-----------------
+
+* Quels sont les différents mode de démarrage d'hibernate 
+-----------------
+create, update, NONE ...
+-----------------
+
+* Comment flusher une repository et pourquoi faire 
+-----------------
+Hibernate cache les sql query et ne les exécutes sur la db que lorsque la transaction commit.
+Parfois, on veut exécuter tout de suite l'SQL donc flush vide le cache et exécute immédiatement.
+-----------------
+
+* Que fait on pour optimiser la lecture dans une table contenant un grand volume
+-----------------
+partionnement
+-----------------
+
+* Quels sont les différents types d'index
+-----------------
+
+-----------------
+
+* Quand est ce qu'on utilise les uns et les autres 
+-----------------
+
+-----------------
+
+
+* Un des deux objets suivants est thread safe, pourquoi ? Session, SessionFactory
+
+-----------------
+
+-----------------

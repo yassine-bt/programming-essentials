@@ -1,0 +1,55 @@
+* Comment vous optimisez votre ORM / Base de données ?
+
+-----------------
+- Toujours développer avec Hibernate avec les traces activées et ne pas croire
+ que Hibernate va optimiser les requêtes par magie.
+- Initialiser les relations en mode différé/lazzy.
+- Puis au cas par cas s'assurer que ce mode de chargement ne génère pas les problèmes
+ dits de N+1 ou les produits cartésiens.
+- Optimiser les modes de chargement en utilisant les techniques de chargement par jointure,
+ chargement par sous select...
+- Bien travailler les index, jointures...
+----------------- 
+
+C'est quoi le problème dit de N+1 selects ? 
+
+-----------------
+- Suposons qu'on a une voiture et pour chaque voiture consulter ses roues
+donc on ferait :
+Select * from voitures 
+ Select * from roues where carId = ? 
+ donc pour N voiture on fera N appel de roues + l l'appel des voitures
+ Or, on aurait pu faire plutot :
+ Select * from roues
+ puis tout matcher en mémoire
+-----------------
+
+Quelles sont les différentes stratégies de chargements de hibernate :
+
+-----------------
+Chargement par jointure - Hibernate récupère l'instance associée ou la collection dans un même SELECT,
+ en utilisant un OUTER JOIN.
+
+Chargement par select - Un second SELECT est utilisé pour récupérer l'instance associée ou la collection.
+A moins que vous ne désactiviez explicitement le chargement tardif en spécifiant lazy="false", 
+ce second select ne sera exécuté que lorsque vous accéderez réellement à l'association.
+
+Chargement par sous-select - Un second SELECT est utilisé pour récupérer les associations pour toutes
+ les entités récupérées dans une requête ou un chargement préalable. A moins que vous ne désactiviez
+ explicitement le chargement tardif en spécifiant lazy="false", ce second select ne sera exécuté que
+ lorsque vous accéderez réellement à l'association.
+
+Chargement par lot - Il s'agit d'une stratégie d'optimisation pour le chargement par select 
+Hibernate récupère un lot d'instances ou de collections en un seul SELECT en spécifiant
+ une liste de clé primaire ou de clé étrangère.
+-----------------
+
+Comment fonctionne le chargement tardif des associations
+-----------------
+L'entité qui est pointée par l'association doit être masquée derrière un proxy.
+Hibernate implémente l'initialisation tardive des proxys sur des objets persistents 
+via une mise à jour à chaud du bytecode (à l'aide de l'excellente librairie CGLIB).
+
+Par défaut, Hibernate génère des proxys (au démarrage) pour toutes les classes persistantes
+et les utilise pour activer le chargement tardif des associations many-to-one et one-to-one.
+-----------------

@@ -1,0 +1,294 @@
+* Différence entre Guice et Spring
+
+-----------------
+- Guice est la plateforme d'injection de dépendance de Google.
+- Guice préfère l'injection par constructeur à l'injection par setter.
+Ceci permet d'avoir une meilleure immutabilité d'une classe.
+----------------- 
+
+* Connaissance d’Eureka et Zuul ?
+
+-----------------
+Eureka : Netflix Load-Balancing and FailOver (circuitBreaker) pour des micro-services.
+Utiles pour un environement AWS où les serveurs bougent tout le temps sans IP fixes.
+source : https://github.com/Netflix/eureka/wiki/Eureka-at-a-glance
+
+Zuul : Netflix api Management Solution. 
+Permet dynamic routing, monitoring, resiliency, security,..
+----------------- 
+
+* Connaissance d’une solution d’API Management ? A quoi sert une solution d’API Management?
+
+-----------------
+Zuul.
+Elle sert à dynamic routing, monitoring, resiliency, security.
+Sert à gérer d'une façon unique et centralisée les problématiques communes aux microservices.
+source : https://microservices.io/patterns/apigateway.html
+----------------- 
+
+* Connaissance d’Oauth2 ? Comment ça marche ? A quoi ça sert ?
+
+-----------------
+OAuth2 est un protocle d'authentification.
+Il sert à attribuer une "Authorization" aux consommateurs d'un service.
+Le mécanisme se fait via un token. Le client s'authentifie sur un service qui lui
+génére  un token qui définie son ROLE. Le client détient ce token et le transporte
+dans le header d'une requete http. Un intercepteur niveau webservice API qui va récupérer
+le token, vérifie sa validité, l'identité et le role du client. Puis permet ou pas 
+la "consommation" du service.
+----------------- 
+
+* Swagger ? Comment ça marche ? A quoi ça sert ? Quels sont les principaux intérêts ?
+
+-----------------
+Swagger permet de documenter une API REST.
+Exposer un contrat d'interface qui servira à générer un client Rest.
+Ca marche par l'annoatation des signatures de service.
+----------------- 
+
+* Connaissance des Verbes REST ? Différence Put/Post ?
+
+-----------------
+Verbe REST : GET, POST, PUT, DELETE, PATCH
+Le post est idemPotent : çad il ne modifie l'état d'une ressource
+du coup il est utilisé à la création
+le PUT n'est pas idempotent, il modifie une ressource.
+----------------- 
+
+* Qu'est ce que le RESTFul ? Quelles sont les bonnes pratiques REST?
+
+-----------------
+-Les ressources sont identfiées par un URI unique
+-Les ressources sont manipulés par des vers HTTP: GET, POST, PUT, DELETE, PATCH
+-L'usage du "content-negociation" avec le header accept pour recup XML ou JSon par exemple
+-Maintenir l'état de l'objet dans sa représentation
+-Maintenir la relation entre objet explicitement dans leur représentation
+----------------- 
+
+* Codes Http ? Lesquels tu peux citer ? Différence entre classe 400/500
+
+-----------------
+les 2XX pour le succès (200 OK, 201 Created..)
+les 4XX pour les erreur client (404 not found, 403 forbidden,...)
+les 5XX pour les erreur Serveur ( 500 internal server error)
+----------------- 
+
+* Sais-tu déployer un War ou un Jar ? Allez plus loin que le Nexus…
+
+-----------------
+- Déploiement via docker : 
+d'abord écrire un docker file :
+From tomcat:8-jre8
+ADD dockerwar.war /usr/local/tomcat/webapps/
+Ensuite construire une image :
+docker build -t webserver .
+enfin la démarrer :
+docker run -it --rm -p 8080:8080 --name dockerwar webserver
+
+- Déploiement via maven :
+écrire la conf dans pom.xml 
+puis : mvn tomcat7:deploy 
+----------------- 
+
+* Connais-tu Webpack ? A quoi ça sert ? Cite quelques exemples d’usages.
+
+-----------------
+Webpack est un gestionnaire de dépendance.
+Au build, il cherchera toutes les ressources nécessaires à ton app :
+Javascript, images, fonts, and CSS, dans un dependency graph
+----------------- 
+
+* Sais-tu comment faire des optimisations côté Front ? Concaténation….
+
+-----------------
+Non, par contre, le ng-build le fait.
+----------------- 
+
+* As-tu déjà utilisé Git ? Pourquoi ? Comment ? Bonnes pratiques ?
+
+-----------------
+Git est Gestionnaire de version puissant.
+Les bonne pratiques  :
+- travailler en features branches
+- toujours rebase avant push
+- Jamais forcer un push
+----------------- 
+
+* Angular CLI ? Connaissance ? Utilisation ?
+
+-----------------
+- Permet de bootstrapper une application angular rapidement.
+Il suffit de ng new myApp pour créer une app
+enuite npm install pour les dépendance
+npm start pour compiler les sources et démarrer le serveur
+----------------- 
+
+* Connais-tu GitFlow ? A quoi ça sert ?
+
+-----------------
+Git flow c'est travailler en feature branch.
+on tire une branche, on développer la feature 
+Une fois on a finit, on fait un merge request
+un collègue fait une revue de code puis merge sur la branche principale (dev)
+----------------- 
+
+* A quoi sert le Rebase sur Git ?
+
+-----------------
+Garder l'historique des features dans le bon ordre
+----------------- 
+
+* RxJS ? Connaissance ? A quoi ça sert ?
+
+-----------------
+rxJs : reactive programming front
+rxJs introduit le pattern des Observables en front.
+Un observable c'est un pattern qui fusionne Observer et iterator.
+permet de souscrire un observable. Une fois modifié, le souscripteur est notifié,
+il peut enchainer à ce moment ces traitement, voire utiliser les données modifiées.
+----------------- 
+
+* RxJava ? Connaissance ? A quoi ça sert ?
+
+-----------------
+Pareil que rxJs. Il permet la gestion des event-based program d'une façon asynchrone
+en utilisant les séquences d'observables.
+----------------- 
+
+* Nouveautés apportées par Java 8 ? Connaissance ? Utilisation ?
+
+-----------------
+-Stream
+-Lambda
+-method reference
+----------------- 
+
+* Streams en Java 8 ? Connaissance ? A quoi ça sert ? Comment ça marche ?
+
+-----------------
+Permet de construire, à partir d'une source de données (collections, fichier) un 
+flot de données transférable sur un ensemble d'operation de transformation.
+----------------- 
+
+* Microservices ? Connaissance ? A quoi ça sert ? Comment ça marche ?
+
+-----------------
+- Une architecture qui vise à découper en block fonctionnel indépendant qui exposent
+des webservices unitaires et mono-fonctionnel
+
+Ca sert à mieux scaler l'application : multiplier et loadbalancer les ressources
+les plus sollicitées d'une application
+- ça sert aussi à simplifier et dégrossir la complexité logicielle
+- simplifier l'évolution sans impact big bang
+----------------- 
+
+* Tests ? Bonnes pratiques ? Quels outils ? Quelle couverture serait optimale selon toi?
+
+-----------------
+test unitaire : test unitairement une fonction sans tirer toutes ses dépendances
+test d'integration : test un module en s'integrant aves ses semblables
+
+Bonnne pratiques :
+- nomenclature des tests: approche fontionelle should_return_five
+- écrire en BDD : given when then
+
+Outils :
+- Junit, mockito
+-wiremock, spock...
+- sonar, EclEmma pour la couverture
+Couverture optimale : 100%
+car si on est dans un contexte CI/CD, le plus le code est couvert, le mieux qu'on se porte.
+----------------- 
+
+* Tests d’intégration ? A quoi ça sert ? Comment ça marche ? Connais-tu un outil pour le faire ?
+
+-----------------
+Tester un module en s'integrant avec les composantes qui lui sont externes.
+ça sert à tester la compatibilité d'un module avec d'autres.
+----------------- 
+
+* TDD ? Connaissance ? Bonnes pratiques ? Comment ça marche?
+
+-----------------
+- TDD : commencer par écrire des tests non passants, puis écrire du code jusqu'à les faire
+passer
+----------------- 
+
+* Connais-tu/As-tu déjà utilisé Typescript ?
+
+-----------------
+Oui.
+C'est un langage fortement typé
+offre des structures comme : Enum, interface, class
+----------------- 
+
+* Connais-tu/As-tu déjà utilisé ES6 ?
+
+-----------------
+
+----------------- 
+
+* Connais-tu/As-tu déjà utilisé les composants sur AngularJS ?
+
+-----------------
+
+----------------- 
+
+* As-tu déjà fait du multithreading en AngularJS?
+
+-----------------
+nope
+----------------- 
+
+* Connais-tu le Double Binding sur Angular ?
+
+-----------------
+There’s one directive in Angular >= 2.x that implements two-way data binding: ngModel. 
+----------------- 
+
+* Imagine que tu as un problème de performance sur ton application web ? Comment tu t'y prend
+pour l'identifier/le résoudre ?
+
+-----------------
+- consulter la vue network du déboggueur du navigateur
+- vérifier si les lenteurs viennent des WS de l'api ou front ? 
+- si front, vérifier les ressources qui ont mis du temps à se charger puis essayer
+de les optimiser soit en lazyloading, soit en compression..
+----------------- 
+
+* Comment tu expliquerais une promesse en angular à un développeur plus junior que toi ?
+
+-----------------
+?
+----------------- 
+
+* Quel est le ratio entre dév. et tests lorsque tu développes une feature ?
+
+-----------------
+50% ? 
+----------------- 
+
+* Imaginons que tu as un budget illimité pour réaliser une application web ? Quelle stack tu
+mettrais en place ? Pourquoi ?..
+
+-----------------
+Je mettrais angular en front car sont architecture est bien modulaire. 
+Il se base sur les pattern d'injection de dépendance.
+coté back, microservices avec api gateway
+----------------- 
+
+* Où fais-tu ta veille techno ? Quelle sites ? Quelles technos ont retenu ton attention ?
+
+-----------------
+les sites de la veille techno :
+- les castcodeurs, devoxx (youtube), infoQ...
+sinon meetups .. 
+----------------- 
+
+* En combien de temps penses-tu pouvoir monter en compétences sur les technos qu’il te
+manque ?
+
+-----------------
+prise en main, basic, intro : 2 jours
+maitriser : à partir d'un mois
+----------------- 

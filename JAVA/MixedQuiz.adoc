@@ -1,0 +1,103 @@
+
+* Qu'est ce que le hachage ? A quoi sert la méthode hashCode ?
+
+-----------------
+Chaque Instance Java d'une classe Object implémente la méthode hashCode qui permet de calculer
+ une valeur numérique décrivant l'objet.
+Ce hashcode permet d'identifier un objet quand il est affecté 
+à une collection d'objet ( i.e de type Map, set..).
+Par exemple l'unicité d'un Objet dans un Set dépend de l'unicité de son Hashcode.
+-----------------
+
+* Comment trier une liste de chaine de caractère ? Connaissez-vous des algorithmes de tri ?
+
+-----------------
+Java7 : Il suffit d'utiliser Collections.sort().
+Java8 : Utiliser les streams. Exemple :
+String[] str = new String[] { "a", "b", "c" };
+List<String> list = Arrays.asList(str);
+list.stream().sorted().forEach(e -> System.out.println(e));
+Les algo de tri : Par insertion, par tas, par fusion.
+-----------------
+
+* Comment désigne-t-on la complexité d'un algorithme ?
+
+-----------------
+* Complexité Temporelle : nombre d'instructions élementaires à exécuter
+* Complexité Spaciale : mémoire nécessaire à l'execution de l'algorithme
+-----------------
+
+* Que permet le pattern stratégie ?  Sinon présentez un pattern maitrisé..
+
+-----------------
+Permet de implémenter différents comportements pour la meme instance. 
+Changer le comportement selon le contexte en runtime.
+Sinon :
+Observer : Notifier un observer suite à changement de données d'un objet d'observation
+Factory : Déléger l'instanciation d'objet à une Facotry qui crée des objets
+ selon un parametre donné. 
+exemple : facotry d'un email dans un contexte de dev est un string qu'on affiche 
+à la console et dans un contexte
+de prod un vrai email envoyé sur le réseau...
+-----------------
+
+
+* Quels sont les verbes HTTP d'une architecture REST ? 
+-----------------
+GET :pour la lecture d'un objet
+PUT : pour la création d'une ressource
+POST: pour la modification d'une ressource
+DELETE: pour la supression
+PATCH : modification partielle de quelque attributs d'une ressource
+-----------------
+
+* Comment développer  un client WS SOAP ? 
+-----------------
+Recupérer un WSDL, générer les Classes avec CXF-generate-source
+Sinon... bonne changce !
+-----------------
+
+* Quels sont les phases d'un build Maven ? 
+-----------------
+validate :Valide que le projet est correctement défini
+compile: Compile les sources
+test :Lance les tests unitaires
+package :Prépare la distribution du projet. (archives Jar, War, Ear...)
+integration-test :Lance les tests d'intégration
+verify :Lance des tests de validation du package créé.
+install :Installe le package en local sur la machine pour pouvoir être réutilisé comme dépendance.
+deploy :Déploie le package sur un serveur pour qu'il puisse être réutilisé par tout le monde.
+-----------------
+
+* Java 8 : Que désigne les lambda expressions ? les Streams, les collectors ? 
+-----------------
+Une expression lambda est avant tout une implémentation de la monade.
+ Il s'agit d'une ecapsulatation d'un traitement
+qu'on peut passer à un autre pour faciliter l'expression de l'instruction.
+Permet d'écrire du code fonctionnel.
+Une expression lambda est une fonction anonyme : sa définition se fait sans
+ déclaration explicite du type de retour, ni de modificateurs d'accès ni de nom.
+ C'est un raccourci syntaxique qui permet de définir une méthode directement
+ à l'endroit où elle est utilisée.
+-----------------
+
+* Qu'est ce que le TDD, le BDD ? La différence entre un test unitaire et d'intégration ? 
+-----------------
+TDD : Test Driven Development, commencer par développer des tests non passants qui
+décrivent le but du code qu'on écrit.
+Ensuite, ecrire les méthodes jusqu'à ce que les tests passent.
+BDD : behavior-driven development :Le processus BDD met en avant le langage naturel 
+et les interactions dans le processus de développement logiciel.
+Les développeurs utilisant le BDD utilisent un langage naturel en combinaison avec 
+le langage du domaine domain driven design pour décrire l'objectif et le bénéfice de leur code
+-----------------
+
+* Que permet Docker ?
+
+-----------------
+Il permet de faire abstraction de l'environnement de déploiement, de ses contraintes et de ses configurations.
+Il permet du coup de packager des applications dans des contenaires isolés. facilite le déploiement ! 
+-----------------
+
+
+

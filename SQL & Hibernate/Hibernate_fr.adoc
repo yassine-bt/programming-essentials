@@ -1,0 +1,129 @@
+* Qu'est ce qu'Hibernate?
+----------------- 
+C'est un ORM (Object Relational Mapping). C'est un logiciel permettant de faire correspondre
+un modèle de donnée relationnel (tables du SGBD)  à un modèle orienté objet (classes Java)"
+----------------- 
+
+* Quelle est l'utilité de ce framework?
+
+----------------- 
+"Il permet d'éviter la création d'objets via JDBC. Il offre des fonctionnalités avancées
+pour la performance comme le cache, le lazy-loading…"
+----------------- 
+
+* Quels sont les différents types d'association?
+
+----------------- 
+"Les différents types d'association sont:
+- one to one
+- one to many
+- many to one
+- many to many"
+----------------- 
+
+* Qu'est ce que le lazy-loading?
+
+----------------- 
+le lazy-loading est le chargement à la demande: lors du chargement d'un objet impliqué
+ dans une association de type one to many par exemple, la collection enfant ne sera 
+ chargée que lors du premier accès à une propriété d'un élément.
+----------------- 
+
+* Comment est-il implémenté?
+
+----------------- 
+"Il est implémenté grace à des proxys générés dynamiquement par Hibernate. 
+Ces proxys sont des implémentations de sous classes des objets persistants,
+créés par Hibernate, interceptant les appels et effectuant le chargement en base si nécessaire."
+----------------- 
+
+* Quels sont les trois états possibles dans le cycle de vie d'un objet 
+géré par Hibernate?
+
+----------------- 
+Les trois états sont: transient, persistant et détaché
+----------------- 
+
+* Donner une définition pour chacun d'eux?
+
+----------------- 
+- transient: objet nétant associé à aucune ligne de la base de données 
+(par exemple, un objet nouvellement instancié via un 'new') et non associé à un contexte transactionnel.
+
+-persistant: objet associé à une ligne de la base de données via un gestionnaire de persistantce (session).
+
+-détaché: objet ayant été rendu persistant via un gestionnaire de persistance et ne l'étant plus suite
+à la fermeture de celui-ci. Il est utilisable mais les modifications lui étant apportées 
+ne sont plus synchronisées avec la base de données."
+----------------- 
+
+* Qu'est ce qu'un cache de base de données?
+
+----------------- 
+Un cache est une copie locale, en mémoire ou sur le  disque de la machine sur laquelle est installée 
+le serveur d'application, des données se trouvant en base. 
+----------------- 
+
+* Comment est géré le caching dans Hibernate?
+
+----------------- 
+"Hibernate contient deux caches: 
+- un cache de premier niveau matérialisé par l'objet Session. Il est obligatoirement utilisée,
+ et ce de manière transparente pour l'utilisateur.
+- un cache de second niveau matérialisée par l'objet SessionFactory. Il est facultatif 
+et doit être pluggué à Hibernate par le biais d'une implémentation à choisir selon le
+ niveau de service souhaité (cluster,...)"
+----------------- 
+
+* Dans quels cas ce système est-il utilisée?
+
+----------------- 
+"Il est utilisée lorsque:
+- l'application effectue une recherche d'objet par identifiant (clé primaire)
+- la couche de persistance résout une association par chargement paresseux
+- pour mettre en cache le résultat d'une requête."
+----------------- 
+
+* Quels sont les différents types de configuration d'Hibernate?
+
+----------------- 
+"Les types sont:
+- configuration par fichiers XML
+- configuration par annotations Hibernate 
+- configuration par annotations JPA"
+----------------- 
+
+* A quoi servent-ils?
+
+----------------- 
+"Ils sont utilisés pour: 
+- définir les paramètres de connection à la base de données
+- mapper les objets et  attributs d'objets persistants avec les tables et colonnes de la base de données
+-  pour définir les associations, les stratégies de chargement, de caching…"
+----------------- 
+
+* Quels sont les différents moyens d'exécution de requêtes en base de données?
+
+----------------- 
+"Les différents moyens sont:
+- le langage HQL
+- l'API Criteria
+- le SQL natif"
+----------------- 
+
+- Quels sont les cas d'utilisation?
+----------------- 
+"SQL natif: à utiliser de manière exceptionnelle pour bénéficier de l'optimisation
+spécifique à une base de données.
+API Criteria: plus approprié pour les requêtes dynamiques comportant des restrictions
+HQL: plus approprié pour les requêtes statiques et complexes, du fait de sa facilité de lecture"
+----------------- 
+
+* Comment est gérée la notion d'héritage dans Hibernate?
+
+----------------- 
+"3 stratégies possibles:
+- 1 table unique pour une hiérarchie de classe
+- 1 table par classe concrète
+- 1 table plus une jointure par classe"
+----------------- 

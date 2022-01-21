@@ -1,0 +1,84 @@
+
+* Quelle est la différence entre un Component et une Directive
+
+----------------- 
+Selon la doc, ils existent trois types de directives.
+- Component : un composent qui a son cycle de vie et comportement
+- Structural directives : comme *ngFor et *ngIf; ils servent à changer
+la structure du DOM.
+- Attribute directives : utilisé pour ajouter du comportement à un 
+element du dom en se basant sur des méthode/services etc.
+----------------- 
+
+* Comment est faite l'injection de dépendance dans Angular ? 
+
+----------------- 
+- via providers
+- via constructeur
+----------------- 
+
+* Quel est l'apport de TypeScript par rapport à javascript? 
+
+----------------- 
+- langage fortement typé
+- propose plus de structures : Enum, interface, Class..
+----------------- 
+
+* Comment définir le router d'une application Angular ? 
+
+----------------- 
+On définit un tableau de Routes qui prend pour chaque element un path et le composant
+qui lui est associé. ce tableau de routes est passé dans le RouterModule de l'application.
+----------------- 
+
+* Qu'est ce qu'un pipe ? Donnez un exemple d'usage
+
+----------------- 
+Comme dans unix, ca prend des données en input pour le tranformer en output.
+un cas d'usage : filtrer des éléments d'une liste par le bias d'une search query.
+----------------- 
+
+* Comment écrire un test Angular ? 
+
+----------------- 
+- TU :jasmin
+-E2E  : protractor
+----------------- 
+
+* Qu'est ce qu'un Observable ?
+
+----------------- 
+-Est un pattern qui combine "Observer" et "Iterator", 
+Il permet dans un contexte de reactive programming de gérer des evennements 
+d'une façon asynchrones
+----------------- 
+
+* Comment on peut faire communiquer des données entre deux composents distants ? 
+
+----------------- 
+- par injection de service
+----------------- 
+
+* Comment on peut faire trois requêtes simultanées en Angular ? 
+
+----------------- 
+return forkJoin(
+    this.http.get(...),
+    this.http.get(...),
+  )
+  .pipe(
+    map(results => [resp, ...results]),
+  )
+----------------- 
+
+* Comment on peut faire trois requêtes séquentielles en Angular ? 
+
+----------------- 
+use pipe ?
+----------------- 
+
+
+
+
+
+

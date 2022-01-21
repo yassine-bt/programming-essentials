@@ -1,0 +1,170 @@
+* Quelles sont les différences principales entre le langage Java et le C++?
+
+----------------- 
+"En java:
+- on ne peut pas faire d'héritage multiple
+- la mémoire est gérée par le garbage collector tandis qu'en C++,
+elle l'est manuellement par le développeur
+- le langage Java est portable grace à la JVM, contrairement au C++"
+----------------- 
+
+* Qu'est ce qu'une interface?
+
+----------------- 
+Une interface est type contenant que des méthodes abstraites et des constantes. 
+----------------- 
+
+* Qu'est ce qu'une classe abstraite?
+
+----------------- 
+"Une classe abstraite est une classe ne pouvant pas être instanciée. Elle peut contenir 
+des méthodes abstraites"
+----------------- 
+
+* Quelle est la différence avec une interface ? Quel est l’intérêt de l’une
+ par rapport à l’autre ?"
+
+----------------- 
+"Différences:
+- Une interface n’implémente aucune méthode.
+- Une classe, ou une classe abstraite peut implémenter plusieurs interfaces 
+(et donc simuler l'héritage multiple), mais n’a qu’une super classe, alors qu’une interface
+ peut dériver de plusieurs autres interfaces.
+- Des classes non liées hiérarchiquement peuvent implémenter la même interface"
+----------------- 
+
+ * Quelles sont les visibilités possibles en Java? Expliquez quelles sont 
+les différences"
+
+----------------- 
+"Les visibilités sont:
+- Private : membres visibles uniquement dans la classe
+- Protected : membres visibles par les classes filles et les classes du même package
+- Public : membres visibles par toutes les classes
+- Package : membres visibles par les classes du mêmes package
+"
+----------------- 
+
+* Citez moi différents type de collection
+
+----------------- 
+"Exemples de collection:
+- List
+- Map
+- Set
+- Queue
+"
+----------------- 
+
+* Donnez trois  implémentations de List
+
+----------------- 
+ArrayList, Vector, LinkedList
+----------------- 
+
+* Quelles sont les différences entre ces implémentations?
+
+----------------- 
+"Les différences sont:
+- Les méthodes de la classe Vector sont synchronisées, pas celles d’ArrayList.
+- ArrayList : ajout d’un élément uniquement en fin de liste. Adapté pour un besoin d’itération rapide.
+- LinkedList permet d’ajouter des éléments au début ou à la fin de la liste
+ -> liste doublement chaînée. Adapté pour un besoin d’insertion et de suppression rapide"
+----------------- 
+
+* Quelle est la différence entre HashTable et HashMap?
+
+----------------- 
+La différence est que les méthodes de HashTable sont synchronisées contrairement à celles de HashMap.
+HashMap n'est donc pas Thread-Safe mais offre une meilleure performance
+----------------- 
+
+* Décrivez le fonctionnement de HashMap, en détaillant l'usage de hashcode et equals"
+
+----------------- 
+"La HashMap va constituer une partition des  valeurs de hashcode des différentes clés. 
+Chaque valeur de hashcode correspondra a un ensemble de clés. 
+Le but étant d'avoir le plus de valeurs différentes possibles afin d'optimiser 
+la recherche (get(clé)) qui a lieu comme suit:
+- Comparaison de la valeur de hashcode de la clé passée en paramètre avec celles de la HashMap.
+- Si la valeur est trouvée, comparaison de la clé avec celles se trouvant dans l'ensemble
+ désignée par le hashcode via la méthode equals.
+- Si la comparaison avec l'une des clés de l'ensemble retourne ""true"",
+retour de la ""value"" correspondante
+Sachant cela, il en découle que les méthodes equals et hashcode() doivent respecter le contrat suivant:
+ 2 objets égaux au sens de equals doivent l'être au sens de hashcode"
+----------------- 
+
+* Citez moi les types primitifs par ordre de grandeur
+
+----------------- 
+char, byte, short, int, long, float, double
+----------------- 
+
+ * A quoi sert le mot clé final?
+
+----------------- 
+"Son utilisation diffère selon le type auquel il est accolé:
+- Devant une variable: la variable ne peut être initialisée qu'une seule fois
+- Devant une méthode: la méthode ne peut pas être redéfinie dans une classe fille
+- Devant une classe: cette classe ne peut pas être héritée"
+----------------- 
+
+ * A quoi sert le mot clé transient
+
+----------------- 
+Ce mot-clé se positionne dvant une variable et signifie que la valeur de ladite
+ variable ne sera pas sauvegardée lors du processus de sérialisation
+----------------- 
+
+ * Que signifie le mot clé "synchronized"?
+
+----------------- 
+Il permet de sécuriser l'accès à des données partagées dans un environnement 
+multi-threadé via le mécanisme d'exclusion mutuelle
+----------------- 
+
+ * A quel niveau est positionné le verrou lorsqu'on l'utilise?
+
+----------------- 
+Il est positionné au début et relaché à la fin d'une section critique (bloc de code) ou d'une méthode
+----------------- 
+
+ * Quel est le verrou utilisé lorsque le mot clé "synchronized" est placé devant une méthode statique?
+
+----------------- 
+Le lock est celui de la classe Class représentant la classe contenant la méthode statique.
+----------------- 
+
+ * Qu'est ce que le Garbage Collection ?
+
+----------------- 
+"C'est une fonctionnalité de la JVM permettant de gérer sa mémoire. Il a pour rôle de:
+- s'assurer que les objets ""vivants"" (c'est-à-dire accessibles depuis un thread vivant) ne seront pas supprimés
+- libérer l'espace mémoire occupé par les objets non atteignables par un thread vivant
+- allouer de l'espace aux objets nouvellement créés
+- compacter la mémoire dans la mesure du possible"
+----------------- 
+
+ * Expliquez son fonctionnement de manière précise?
+ 
+----------------- 
+"Fonctionnement de la JVM Hotspot:
+Les objets naissent, vivent et meurent dans une zone mémoire de la JVM: le tas (heap).
+Celle-ci est constituée de 3 zones:
+- Young space: composée elle-même de l'Eden + 2 Survivors + de l'espace virtuel. Cet zone accueille les nouveaux objets.
+- Tenured Space: composé d'objets. Cette zone contient les objets à longue durée de vie.
+- Perm : archivage du code des classes chargées pour l'exécution du programme.
+La gestion du cycle de vie des objets se compose de deux étapes: la vie dans le young Space et la vie dans le Tenured Space.
+La vie dans le Young Space:
+-> nouvelle instance créée placée dans la partie Eden
+-> placée ensuite dans le Survivor 1
+-> quand le taux d'occupation du Young Space augmente beaucoup, exécution d'une Minor Collection:
+ algorithme effectuant le parcours et la copie des objets ""vivants"" de l'Eden et du Survivor 1 vers le Survivor 2.
+-> lorsque le Survivor libre ne contient plus suffisamment de place ou lorsqu'un objet atteint un age
+ suffisant déterminé dynamiquement par la JVM, copie des objets du survivors vers le Tenured Space.
+La vie dans le Tenured Space:
+- Libération et compactage de la mémoire grâce à l'algorithme de Mark-Sweep-Compact: 
+- 1er parcours de la heap pour marquer les objets candidats à la suppression (marquage - Mark)
+- 2ème parcours du heap pour supprimer les objets e libérer la mémoire (Sweep), et pour la compacter (Compact)"
+----------------- 

@@ -1,0 +1,137 @@
+
+
+* What is Angular and Why Angular?
+-------------
+Angular : client side front-end framework.
+for SPA 
+------------- 
+
+* What’s new in Angular 5?
+------------- 
+------------- 
+
+* Name the building blocks of Angular. 
+------------- 
+Modules
+Component
+Template
+Directives
+Data Binding
+Services
+Dependency Injection
+Routing
+------------- 
+
+* What is Transpiling in Angular?
+------------- 
+process of converting typescript to javascript.
+------------- 
+
+* Which of the Angular life cycle component execution happens when a data-bound input value updates
+------------- 
+ngOnChanges à chaque fois data change
+------------- 
+
+* Differentiate between Components and Directives in Angular 5.
+------------- 
+Componenet : découpe l'appli en morceau 
+Directive : add behaviour to Dom elements
+------------- 
+
+* What is the use of @Input and @Output? 
+-------------
+-  @Input : Parent to child (in child)
+- @Output : child to parent (in parent)
+-------------
+
+* What is ng-content Directive? 
+-------------
+ng-content directive utilisé pour ajouter du contenu à un composent
+-------------
+
+* What is ViewEncapsulation?
+-------------
+Styles propagation
+Emulated : styles spread from other html to componenet
+Native : styles do not spread
+NON : styles visible to all componenets
+-------------
+
+*  What are Services in Angular
+-------------
+services provides data to component.
+are injected to constructors
+defined by @Injectable()
+-------------
+
+*  In how many ways the Data Binding can be done ?
+-------------
+(i) Property Binding : use of brackets []
+i* Interpolation : use of {{ }}  ( better readability)
+(ii) Event Binding  : use of (), ex :  (click)="onSave()"
+(iii) Two-Way Data Binding : use of  [(x)]
+-------------
+
+* Angular Lifecycle Hooks ?
+-------------
+onChanges
+onInit
+DoCheck
+AfterContentInit
+AfterContentCheckd
+AfterViewInit
+AfterViewChecked
+onDestroy
+-------------
+
+ *  What is the purpose of using package.json
+-------------
+- check dependency
+- check different profiles (dev, prod)
+-------------
+ 
+* How is SPA (Single Page Application) technology different from the traditional web technology? 
+-------------
+- Traditional : server computes the view and sends to client
+- SPA : page is computed client side.
+---> better when lots of reloading ..
+-------------
+
+* What are ngModel and how do we represent it
+-------------
+- ngModel : directive bind dans les deux sens un textfield par exemple (dom)
+- [()]
+-------------
+
+* Difference btw Promise and Observable
+-------------
+Promise : 
+- gere un seul event
+- Eager :Elle s'execute dès que la promesse est prete
+
+Observable :
+- like stream : on peut gerer plusieurs evennement
+- Lazy : rien ne se passe tant que la souscription n'est pas faite.
+-------------
+
+* What is an AsyncPipe in Angular
+-------------
+?
+-------------
+
+* Explain Authentication and Authorization.
+-------------
+Authentication : identity, access
+Authorization : Droits
+-------------
+
+* What is AOT Compilation
+-------------
+Ahead of time : compiles once
+JIT Just in time : every time
+-------------
+
+* What is Redux? 
+-------------
+State holder 
+-------------

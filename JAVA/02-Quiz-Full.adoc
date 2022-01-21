@@ -1,0 +1,935 @@
+= Quiz
+:toc:
+
+
+
+// ifdef::env-github[]
+// https://www.youtube.com/watch?v=XXXXXX[vidéo de la présentation sur YouTube]
+// endif::[]
+// ifdef::env-browser[]
+// video::XXXXXX[youtube, width=640, height=480]
+// endif::[]
+
+== Java Platform
+ *  Why is Java so popular?
+-----------------
+ u serious ?
+-----------------
+ 
+ *  What is platform independence?
+ 
+-----------------
+"Write Once, Run Evrywhere" est le moto de Java. En fait, l'indépendance du système consiste 
+à développer le même code quel que soit la plateforme sur laquelle il tourne.
+----------------- 
+
+ *  What is bytecode?
+ 
+-----------------
+Une fois le code est compilé, il en génére du bytecode qui sera exécuté sur la JVM.
+----------------- 
+
+ *  Compare JDK vs JVM vs JRE 
+ 
+-----------------
+JVM : charge et exécute le code et provide un runtime envirement
+JRE : est une implémentation de la JVM avec d'autres librairies
+JDK : Offre avec la JRE toutes les librairies nécessaires au développement et à la compilation du code
+----------------- 
+ 
+ *  What are the important differences between C++ and Java?
+ 
+-----------------
+C++ n'est pas un language Platfrom dependant. Il tourne pas sur une VM.
+JAVA ne permet pas l'héritage multiple.
+-----------------  
+
+ *  What is the role for a classloader in Java?
+-----------------
+Le classloader: vérifie le nom d'une classe, si une classe a déjà été chargée,
+vérifie si la classe est une classe Système. Résoud la classe et retourne la classe
+à son appelant. 
+-----------------  
+ 
+ 
+== Wrapper Classes
+ 
+ *  What are Wrapper classes?
+-----------------
+Depuis Java 5 et l'introduction du autoboxing at unboxing, on est capable de passer d'un type natif à un objet directement.
+ i.e de int vers Integer, de boolean à Boolean.. etc la classe Boolean est une wrapper class de boolean
+----------------- 
+ *  Why do we need Wrapper classes in Java?
+----------------- 
+Pour qu'on puisse ajouter un l'objet dans une collection.
+Pour que null soit possible..
+-----------------  
+  *  What are the different ways of creating Wrapper class instances?
+-----------------  
+1- Par construction ; un constructeur qui prend en entrée la valeur du type primitif 
+ou la représentation en String de la valeur.
+2- Par methode static ; une méthode static valueOf() de la classe wrapper qui permet de crée l'objet.
+-----------------  
+  *  What are differences in the two ways of creating Wrapper classes?
+-----------------  
+La différence est que la première fait appel à un constructeur et l'autre à une méthode static !
+-----------------    
+  *  What is auto boxing?
+-----------------
+C'est la conversion automatique entre les wrapper objects et leur type primitif correspondant
+-----------------    
+  *  What are the advantages of auto boxing?
+-----------------  
+L'avantage ; plus simple à écrire.. un souci en moins...
+-----------------    
+  *  What is casting?
+-----------------
+Il s'agit de la conversion d'un primitive, interface ou classe à un/une autre.
+Pour les classes et les interfaces, une règle à respecter est de caster celles qui ont le même Type Hierarchy. 
+Sinon une ClassCastException sera lancée.
+----------------- 
+  
+  *  What is implicit casting?
+----------------- 
+Implicit quand il s'agit du widening pour les primitifs : byte -> short -> int -> long -> float -> double
+ byte i = 50;
+ short j = i;
+ int k = j;
+ long l = k;
+ float m = l;
+ double n = m;
+Pour les classes. Si Child extends Parent, on peut écrire Parent p = new Child();
+----------------- 
+  *  What is explicit casting?
+----------------- 
+L'explicite est quand on veut faire du narrowing : double -> float -> long -> int -> short -> byte
+le narrowing est impossible pr les classes
+----------------- 
+  
+  
+== Strings
+
+  *  Are all String’s immutable?
+----------------- 
+Jusqu'à preuve du contraire ; OUI !
+----------------- 
+  *  Where are String values stored in memory?
+-----------------
+Si le string est créé par constructeur (String str = new String("Hello");) 
+alors il sera enregistré dans la Heap Space comme tout autre objet.
+Si le string est déclaré comme litteral (String str = "Hello";)
+Alors il est dans la "string constant pool"
+----------------- 
+  *  Why should you be careful about String concatenation(+) operator in loops?
+-----------------
+String étant immutable, quand on concatène string litterals dans une boucle :
+for(){
+out += Str;
+}
+à chaque itération on crée un nouvel objet dans la heap space. 
+Par contre si on se contentait d'appender un string dans un stringBuilder,
+On économise de la mémoire (des obj qui servent à rien)
+-----------------
+  *  How do you solve above problem?
+-----------------
+ StringBuiler strBuilder = new StringBuiler('first');
+ for(){
+ strBuilder.append(str);
+ }
+-----------------
+  *  What are differences between String and StringBuffer?
+-----------------
+String est Immutable, override equals et lent à la concaténation de string
+StringBuffer est mutable, ne overides pas equals et rapide à la concaténation
+-----------------
+  *  What are differences between StringBuilder and StringBuffer?
+-----------------
+StringBuffer est sychronized, ce qui n'est pas le cas pour StringBuilder.
+-----------------
+  *  Can you give examples of different utility methods in String class?
+-----------------
+trim, substring, unquote...
+-----------------
+  
+== Object oriented programming basics
+
+  *  What is a class?
+-----------------
+C'est un bluePrint d'un objet ! une squelette..
+-----------------
+  *  What is an object?
+-----------------
+L'objet est une instance d'une classe. il a un état et un comportement..
+-----------------
+  *  What is state of an object?
+-----------------
+l'état d'un objet se traduit par ses attributs
+-----------------
+  *  What is behavior of an object?
+-----------------
+Se sont plutot les méthodes qui décrivent ici le comportement d'un objet.
+-----------------
+  *  What is the super class of every class in Java?
+-----------------
+Object
+-----------------  
+  *  Explain about toString method ?
+-----------------
+Une méthode qui permet d'avoir une représentation en chaine de charatere de l'objet.
+Une méthode une fois overridden permet d'afficher la valeur d'un objet. 
+sinon, de base, elle affiche le hashcode de l'objet
+-----------------  
+  *  What is the use of equals method in Java?
+-----------------  
+Elle sert principalement à comparer deux objets. de base, elle compare les deux hashcode de deux objets.
+-----------------  
+  *  What are the important things to consider when implementing equals method?
+-----------------  
+Deux objets égaux, ont le même hashcode. Si on reimplemente equals, il faut reimplémenter hashcode
+pour garder une cohérence. surtout si les objets sont utilisés dans des collections..
+-----------------  
+  
+  *  What is the Hashcode method used for in Java?
+-----------------
+Le Hashcode est une représentation numérique du 'contenu' de l'objet.
+Il sert à représenter l'objet dans les collections hashées (hashset, hashmap).
+Deux Objets égaux ont le même hashcode. De ce fait, il sert de clé d'unicité dans ces collections.
+Par conséquent, il est important de réimplémenter Hashcode si on rééimplemente "equals" pour garder cette cohérence.
+-----------------
+  *  Explain inheritance with examples . 
+-----------------
+L'héritage.. c'est quand une classe hérite les attributs et les méthodes d'une classe mère.
+Par exemple un Camion hérite d'un Véhicule. Ainsi qu'une Voiture hérite d'un Véhicule.
+-----------------
+  
+  *  What is method overloading?
+-----------------
+Surcharger une méthode consiste à utiliser la même signature d'une méthode, tout en changeant
+le nombre et/ou le type des paramètres d'entrée.
+-----------------
+  
+  *  What is method overriding?
+-----------------
+Il s'agit de réimplémenter une méthode qu'on hérite d'une classe mère ou qu'on implémente d'une interface
+-----------------
+  
+  *  Can super class reference variable can hold an object of sub class?
+-----------------
+Oui C'est possible
+-----------------
+
+  *  Is multiple inheritance allowed in Java?
+-----------------
+Non, par contre c'est possible d'étendre une classe et implémenter plusieurs interfaces
+-----------------
+
+  *  What is an interface?
+-----------------
+Une interface est une classe totalement abstraite. Elle définit un comportement à la classe qui l'implémente..
+-----------------
+
+  *  How do you define an interface?
+-----------------
+public interface Somethingable{
+}
+-----------------
+
+  *  How do you implement an interface?
+-----------------
+public class someClass implements Somethingable{
+}
+-----------------
+
+  *  Can you explain a few tricky things about interfaces?
+-----------------
+....
+-----------------
+  *  Can you extend an interface?
+-----------------
+oui.
+-----------------
+  *  Can a class extend multiple interfaces?
+-----------------
+oui
+-----------------
+  *  What is an abstract class?
+-----------------
+Une classe abstraite est une classe qu'on ne peut pas instancier.
+Elle peut contenir une ou plusieurs méthode abstaites ( qui n'ont pas de corps)
+-----------------
+  
+  *  When do you use an abstract class?
+-----------------
+Elle est généralement utilisée quand on veut INTERDIRE l'instanciation de la classe mère.
+Par exemple, la classe Camion et Voiture hérite de la classe Vehicule qui décrit un ensemble 
+de caractéristiques communs aux deux classes filles. Sauf qu'on n'a pas besoin d'instancier
+la classe Vehicule dans notre système. Car ça n'a pas de sens!
+-----------------
+  
+  *  How do you define an abstract method?
+-----------------
+ public abstract class Blabla{
+ }
+-----------------  
+  *  Compare abstract class vs interface?
+-----------------
+Une interface est une coquille vide qui définit un contrat.
+Elle ne comporte que des signatures de méthode sans corps.
+Une classe abstraite peut définir un comportement en ayant certaines méthodes nonAbstraitres.
+-----------------
+  *  What is a constructor?
+-----------------
+Une méthode permettant d'instancier l'objet à partir de sa classe.
+-----------------
+  
+  *  What is a default constructor?
+-----------------
+C'est un constructeur sans arguments généré par défaut. Il se contente
+de créer l'objet et d'initialiser les attributs telqu'ils sont décrits
+dans la classe.
+-----------------
+  
+  *  How do you call a super class constructor from a constructor?
+-----------------
+super();
+-----------------
+
+  *  What is the use of this()?
+-----------------
+Renvoie l'instance en cours de l'objet.
+-----------------
+  *  Can a constructor be called directly from a method?
+-----------------
+Non, sauf si on le précède par un "new"; on crée une nouvelle instance
+-----------------  
+  *  Is a super class constructor called even when there is no explicit call from a sub class constructor?
+-----------------
+Le compilateur appellera le constructeur par défaut accessible de la superclasse.
+-----------------  
+== Advanced object oriented concepts
+
+  *  What is polymorphism?
+-----------------
+C'est le fait qu'un objet puisse définir son propre comportement et en même temps partager 
+ceux de sa classe mère. Dans Java le polymorphisme se traduit principalement par le fait
+qu'une superClass variable pointe sur une subclasse reference. 
+-----------------    
+  *  What is the use of instanceof operator in Java?
+-----------------
+C'est un opérateur qui permet de vérifier si un objet est un subtype d'un Type donné.
+-----------------
+  *  What is coupling?
+-----------------
+C'est le degré d'interdépendance entre les modules. Un couplage fort/serré quand deux modules 
+échangent beaucoup de données. 
+Un couplage fort génère l'antipattern plat de spaghetti :
+On ne peut pas déterminer le qui, le quoi et le comment d’une modification de données.
+Un couplage fort implique nécessairement une faible indépendance fonctionnelle :
+Le composant logiciel est difficilement réutilisable,
+Le composant logiciel est difficilement testable.
+Si deux tâches accèdent, par couplage fort, à une ressource commune 
+(ressource critique) et qu'elles s'exécutent en exclusion mutuelle, alors si
+une des tâches reste bloquée en section critique elle bloque automatiquement l'autre :
+Risque d'interblocage
+-----------------  
+  *  What is cohesion?
+-----------------
+C'est le degré d'accord des éléments d'un module. 
+un module cohérent a ses éléments étroitement liés et effectuant un nombre réduit d'opérations.
+Des modules peu cohérents sont généralement difficiles à comprendre, à réutiliser et à maintenir, 
+et sont fragiles, puisqu'ils sont affectés par les modifications apportées aux autres modules.
+C'est, en gros, le degré avec lequel les tâches réalisées par un seul module sont 
+fonctionnellement reliées.
+-----------------  
+  *  What is encapsulation?
+-----------------
+C'est le fait d'interdire l'accès à certaines données pour d'autres instances.
+i.e l'utilisation de différents accesseurs..
+-----------------  
+
+  *  What is an inner class?
+-----------------
+C'est une classe définie dans une autre.
+-----------------  
+  
+  *  What is a static inner class?
+-----------------
+C'est une classe statique définie dans une autre.
+-----------------   
+  *  Can you create an inner class inside a method?
+-----------------
+oui . https://blog.xebia.fr/2012/11/08/back-to-basics-bien-maitriser-les-classes-internes-en-java/
+-----------------   
+  *  What is an anonymous class?
+-----------------
+C'est une inner Class qui n'a pas de nom !
+-----------------    
+   
+== Modifiers
+
+  *  What is default class modifier?
+-----------------
+Quand ne met rien devant le nom de la classe, elle est visible dans le package dans lequel elle a été
+créée. ie class MyClass {}.  Les modifiers possibles pour une classe sont : public , abstract &  final
+-----------------    
+  
+  *  What is private access modifier?
+-----------------    
+Ca conserne plutot les attributs et les méthodes. ça les rend visible que par la classe dans laquelle
+ils ont été déclarés.
+-----------------    
+  
+  *  What is default or package access modifier?
+-----------------    
+default & package permettent l'accès à toutes les classes du package d'accéder à l'attribut/méthode.
+-----------------    
+  
+  *  What is protected access modifier?
+-----------------    
+rend accessible toute méthode/attribut du même package ou au subclasses
+-----------------    
+  
+  *  What is public access modifier?
+-----------------    
+rend accessible toute méthode/attribut partout
+-----------------    
+
+  *  What access types of variables can be accessed from a class in same package?
+-----------------    
+public (evidemment)
+package
+protected
+default
+-----------------    
+
+  *  What access types of variables can be accessed from a class in different package?
+-----------------    
+public
+protected si la classe en question est un subclasse
+-----------------    
+
+  *  What access types of variables can be accessed from a sub class in same package?
+-----------------    
+protected
+default
+package
+public
+-----------------    
+
+  *  What access types of variables can be accessed from a sub class in different package?
+-----------------    
+protrected
+public
+-----------------    
+
+  *  What is the use of a final modifier on a class?
+-----------------    
+rend la valeur de la variable inmodifiable en runtime
+-----------------    
+
+  *  What is the use of a final modifier on a method?
+-----------------    
+rend la méthode unoverridable par une subclass
+-----------------    
+
+  *  What is a final variable?
+-----------------    
+rend la valeur de la variable inmodifiable en runtime
+-----------------    
+
+  *  What is a final argument?
+-----------------    
+rend la valeur de la variable inmodifiable en runtime
+-----------------    
+
+  *  What happens when a variable is marked as volatile?
+-----------------    
+Une variable volatile sera mise dans le "main memory" et pas dans le cache du CPU.
+ca sert a eviter des problemes d'incoherence de données en cas de mise intensif d'une donnée
+-----------------    
+
+  *  What is a static variable?
+-----------------    
+Une variable statique ne dépend pas des instances.
+-----------------     
+  
+== conditions & loops
+ 
+  *  Why should you always use blocks around if statement?
+-----------------    
+Ceci émane du "code style". car si on voudrait ajouter une instruction dans la clause if,
+elle ne sera pas prise en compte.
+-----------------     
+
+  *  Should default be the last case in a switch statement?
+-----------------    
+Pareil, c'est beaucoup plus lisible de laisser default à la fin
+-----------------     
+
+  *  Can a switch statement be used around a String
+-----------------    
+Oui, depuis l'introduction des litterals en Java 7, on peut utiliser switch sur un string
+-----------------     
+
+  *  What is an enhanced for loop?
+-----------------    
+for (ElementType element : elementCollection){
+	
+}
+-----------------     
+  
+== Exception handling
+
+  *  Why is exception handling important?
+-----------------    
+1- Faire la difference entre le code régulier et la gestion des erreurs
+2- Propager les erreurs sur la call stack 
+3- Grouper et différencier les erreurs
+-----------------    
+  *  What design pattern is used to implement exception handling features in most languages?
+-----------------    
+try{}catch(){}finally(){}
+-----------------      
+  *  What is the need for finally block?
+-----------------    
+Le besoin pricipal est de permettre au programme de revenir à un état stable suite
+au déclenchement d'une exception. Par exemple : la fermeture d'une connexion à une
+base de données, une ouverture d'un fichier.. etc
+-----------------      
+  *  In what scenarios is code in finally not executed?
+-----------------    
+Toujours
+-----------------        
+ *  Is try without a catch is allowed?
+-----------------    
+Dans le cas où on veut pas catcher l'exception thrown par contre on souahite nettoyer correctement les resources
+par exemple :
+public void yourMethod() throws YourException {
+    try {
+        db.store(mydata);
+    } finally {
+        db.cleanup();
+    }
+}
+-----------------  
+ *  Is try without catch and finally allowed?
+-----------------  
+oui, voir la question précédente.
+-----------------  
+ *  Can you explain the hierarchy of exception handling classes?
+-----------------  
+Tout hérite de Throwable, Error et Exception. Ensuite de Exception on a les RuntimeException (NullPointerException, etc..)
+et les autres...
+----------------- 
+ *  What is the difference between error and exception?
+-----------------
+Une erreur est une Throwable de laquelle le programme ne peut pas se remettre : OutOfMemoryError.. fileMissingError..
+-----------------
+ *  What is the difference between checked exceptions and unchecked exceptions?
+-----------------
+Les unchecked sont les exceptions qu'un programme n'est pas sencé traiter, ou "recover from"
+On ne peut pas se remettre d'un divide by zero, le cas n'est pas sensé se produire à la base !
+Les checked sont les exceptions auquelles on attend un catch à la compilation. 
+il faut les traiter et s'attendre à ce qu'elles surgissent
+-----------------
+ *  How do you throw an exception from a method?
+-----------------
+exemple : public void myMethod() throws IOException{}
+-----------------
+ *  What happens when you throw a checked exception from a method?
+-----------------
+Le try catch sera délégué à l'appelant de la méthode.
+-----------------
+ *  What are the options you have to eliminate compilation errors when handling checked exceptions?
+-----------------
+try catch ou throws 
+----------------- 
+ *  How do you create a custom exception?
+-----------------
+On hérite de Exception 
+----------------- 
+ *  How do you handle multiple exception types with same exception handling block?
+-----------------
+catch (IOException|SQLException ex) {
+    logger.log(ex);
+    throw ex;
+}
+----------------- 
+ *  Can you explain about try with resources?
+-----------------
+On hérite de Exception 
+----------------- 
+ *  How does try with resources work?
+-----------------
+D'abord, la ressource doit être Closeable. 
+try(j'ouvre ma ressource){
+} // la ressource se ferme automatiquement à la fin du traitement
+-----------------  
+ *  Can you explain a few exception handling best practices?
+-----------------
+- Ne jamais avaler une exception dans le catch block
+- Ne jamais throw Exception, favoriser une exception spécifique
+- Ne jamais catcher Exception ou Throwable, favoriser une exception spécifique
+- Encapsuler correctement en passant l'exception telle quelle tans la custom
+- On log ou on throw, pas les deux
+- Ne jamais throw une exception du Finally block
+- Catcher que les checked ( et ce qu'on peut vraiment traiter)
+- Ne pas utiliser printStackTrace()
+- Favoriser finally si on n'a pas de traitement d'exception
+- "Throw Early, Catch Late"
+- Clean ressource apres une exception handeling
+- Ne pas utiliser les exceptions dans le flow control & application Logic
+- Valider l'input très tôt pour minimiser l'exception handeling
+- Log dans un seul message / une seule ligne
+-----------------  
+== Miscellaneous topics
+
+ *  What are the default values in an array?
+-----------------    
+ 0 pour les numériques, '' pour char et null pour les reference types..
+-----------------    
+ *  How do you loop around an array using enhanced for loop?
+-----------------    
+for (ItemType item : itemCollection)
+-----------------    
+ *  How do you print the content of an array?
+-----------------    
+Java 7 : on boucle et on print
+Java 8 : on transforme en stream .. et on print en lambda
+list.stream().forEach(e -> System.out.println(e));
+-----------------    
+  *  How do you compare two arrays?
+----------------- 
+ Arrays.equals(arr1, arr2)), Arrays.deepEquals(arr1, arr2))
+----------------- 
+ *  What is an enum?
+----------------- 
+Une liste de valeurs possibles
+----------------- 
+ *  Can you use a switch statement around an enum?
+----------------- 
+biensur
+----------------- 
+ 
+ *  What are variable arguments or varargs?
+----------------- 
+public static void hello (int ... a)
+----------------- 
+ *  What are asserts used for?
+----------------- 
+....
+-----------------  
+ *  When should asserts be used?
+----------------- 
+...
+----------------- 
+ *  What is garbage collection?
+----------------- 
+Le fait que la JVM se débarrasser des objets qui ne sont plus utilisés.
+-----------------
+ *  Can you explain garbage collection with an example?
+----------------- 
+"Fonctionnement de la JVM Hotspot:
+Les objets naissent, vivent et meurent dans une zone mémoire de la JVM: le tas (heap).
+Celle-ci est constituée de 3 zones:
+- Young space: composée elle-même de l'Eden + 2 Survivors + de l'espace virtuel. Cet zone accueille les nouveaux objets.
+- Tenured Space: composé d'objets. Cette zone contient les objets à longue durée de vie.
+- Perm : archivage du code des classes chargées pour l'exécution du programme.
+La gestion du cycle de vie des objets se compose de deux étapes: la vie dans le young Space et la vie dans le Tenured Space.
+La vie dans le Young Space:
+-> nouvelle instance créée placée dans la partie Eden
+-> placée ensuite dans le Survivor 1
+-> quand le taux d'occupation du Young Space augmente beaucoup, exécution d'une Minor Collection: algorithme effectuant le parcours et la copie des objets ""vivants"" de l'Eden et du Survivor 1 vers le Survivor 2.
+-> lorsque le Survivor libre ne contient plus suffisamment de place ou lorsqu'un objet atteint un age suffisant déterminé dynamiquement par la JVM, copie des objets du survivors vers le Tenured Space.
+La vie dans le Tenured Space:
+- Libération et compactage de la mémoire grâce à l'algorithme de Mark-Sweep-Compact: 
+- 1er parcours de la heap pour marquer les objets candidats à la suppression (marquage - Mark)
+- 2ème parcours du heap pour supprimer les objets e libérer la mémoire (Sweep), et pour la compacter (Compact)"
+----------------- 
+ *  When is garbage collection run?
+----------------- 
+Tout dépend de la stratégie. Dans une Stratégie générationelle, la collection se lance quand une allocation dans une genréation-0 (young) échoue.
+Quand y'a plus d'espace dans une gen-0, on lance une collection. 
+----------------- 
+ 
+ *  What are best practices on garbage collection?
+----------------- 
+La garbage collection est dans certain contexte super couteuse (mobile, embedded..)
+il est du recommandé de :
+- Réutiliser les objets deja créés et eviter de les recréer
+- éviter les object wrappers quand on peut utiliser les primitifs
+- setter les objets à null explicitement si on veut s'en débarrasser
+-----------------  
+ *  What are initialization blocks?
+-----------------  
+On peut initialiser les attributs à la déclaration dans la classe. Sauf qu'il s'agit
+d'un traitement plus complexe ( boucle for) on aura besoin d'un block d'initialisation
+dans lequel on traite et on initialise les attirbuts. ( constructeur, static..)
+ref: https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+-----------------  
+ 
+ *  What is a static initializer?
+-----------------  
+Ce dernier sert à initialiser les membres static de la classe.
+du code peut être directement balancé dans static{}
+ref: https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+-----------------  
+ 
+ *  What is an instance initializer block?
+-----------------  
+une alternative au constructeur, on balance l'initialisation directement
+entre accolade {} ou on appelle un méthode final
+ref: https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+-----------------  
+ 
+ *  What is tokenizing?
+ *  Can you give an example of tokenizing?
+ *  What is serialization?
+ *  How do you serialize an object using serializable interface?
+ *  How do you de-serialize in Java?
+ *  What do you do if only parts of the object have to be serialized?
+ *  How do you serialize a hierarchy of objects?
+ *  Are the constructors in an object invoked when it is de-serialized?
+ *  Are the values of static variables stored when an object is serialized?
+ 
+== Collections
+
+ *  Why do we need collections in Java?
+-----------------  
+les arrays ont une taille fixe
+autres besoins : ensemble, map...
+abstractions : List, map ...
+-----------------   
+ *  What are the important interfaces in the collection hierarchy?
+-----------------  
+Set, List et Queue
+Map
+-----------------   
+ *  What are the important methods that are declared in the collection interface?
+-----------------  
+add, remove, size, contains...
+-----------------  
+ *  Can you explain briefly about the List interface?
+-----------------  
+permet d'ajouter des elements (même dupliqués) 
+-----------------  
+ *  Explain about ArrayList with an example?
+ 
+ *  Can an ArrayList have duplicate elements?
+-----------------  
+oui
+-----------------  
+ *  How do you iterate around an ArrayList using iterator?
+-----------------  
+List<String> liste =  new ArrayList<String>() ;
+liste.add("un") ;
+liste.add("deux") ;
+liste.add("trois") ;
+
+ // création d'un listIterator sur cette liste
+ListIterator<String> it = liste.listIterator() ;
+
+ while(it.hasNext()) {
+    // on ajoute un élément supplémentaire après chaque
+    // élément de la liste
+   String element = it.next() ;
+   it.add(element +  " et demi") ;
+}
+-----------------  
+ 
+ *  How do you sort an ArrayList?
+-----------------  
+java.util.Collections
+Collections.sort() 
+-----------------  
+ *  How do you sort elements in an ArrayList using comparable interface?
+-----------------  
+les elements de la liste doivent implémenter compareTo() de Comperable
+-----------------  
+ *  How do you sort elements in an ArrayList using comparator interface?
+-----------------  
+les elements de la liste doivent implémenter compare() de Comparator.
+la différence c'est que compare prend deux objets en entrée.
+-----------------  
+ *  What is vector class? How is it different from an ArrayList?
+-----------------  
+vector is sychronized, arrayList is not.
+-----------------   
+ *  What is linkedList? What interfaces does it implement? How is it different from an ArrayList?
+ *  Can you briefly explain about the Set interface?
+ *  What are the important interfaces related to the Set interface?
+ *  What is the difference between Set and sortedSet interfaces?
+ *  Can you give examples of classes that implement the Set interface?
+ *  What is a HashSet?
+ *  What is a linkedHashSet? How is different from a HashSet?
+ *  What is a TreeSet? How is different from a HashSet?
+ *  Can you give examples of implementations of navigableSet?
+ *  Explain briefly about Queue interface?
+ *  What are the important interfaces related to the Queue interface?
+ *  Explain about the Deque interface?
+ *  Explain the BlockingQueue interface?
+ *  What is a priorityQueue?
+ *  Can you give example implementations of the BlockingQueue interface?
+ *  Can you briefly explain about the Map interface?
+ *  What is difference between Map and sortedMap?
+ *  What is a HashMap?
+ *  What are the different methods in a Hash Map?
+ *  What is a TreeMap? How is different from a HashMap?
+ *  Can you give an example of implementation of navigableMap interface?
+ *  What are the static methods present in the collections class?
+  
+== Advanced collections
+
+ *  What is the difference between synchronized and concurrent collections in Java?
+ *  Explain about the new concurrent collections in Java?
+ *  Explain about copyonwrite concurrent collections approach?
+ *  What is compareandswap approach?
+ *  What is a lock? How is it different from using synchronized approach?
+ *  What is initial capacity of a Java collection?
+ *  What is load factor?
+ *  When does a Java collection throw UnsupportedOperationException?
+ *  What is difference between fail-safe and fail-fast iterators?
+ *  What are atomic operations in Java?
+ *  What is BlockingQueue in Java?
+  
+== Generics
+
+ *  What are Generics?
+ *  Why do we need Generics? Can you give an example of how Generics make a program more flexible?
+ *  How do you declare a generic class?
+ *  What are the restrictions in using generic type that is declared in a class declaration?
+ *  How can we restrict Generics to a subclass of particular class?
+ *  How can we restrict Generics to a super class of particular class?
+ *  Can you give an example of a generic method?
+ 
+== Multi threading
+
+ *  What is the need for threads in Java?
+ *  How do you create a thread?
+ *  How do you create a thread by extending thread class?
+ *  How do you create a thread by implementing runnable interface?
+ *  How do you run a thread in Java?
+ *  What are the different states of a thread?
+ *  What is priority of a thread? How do you change the priority of a thread?
+ *  What is executorservice?
+ *  Can you give an example for executorservice?
+ *  Explain different ways of creating executor services . 
+ *  How do you check whether an executionservice task executed successfully?
+ *  What is callable? How do you execute a callable from executionservice?
+ *  What is synchronization of threads?
+ *  Can you give an example of a synchronized block?
+ *  Can a static method be synchronized?
+ *  What is the use of join method in threads?
+ *  Describe a few other important methods in threads?
+ *  What is a deadlock?
+ *  What are the important methods in Java for inter-thread communication?
+ *  What is the use of wait method?
+ *  What is the use of notify method?
+ *  What is the use of notifyall method?
+ *  Can you write a synchronized program with wait and notify methods?
+  
+== Functional Programming - Lamdba expressions and Streams
+
+ *  What is functional programming?
+-----------------
+C'est un paradigme de programmation de type déclaratif ( et non impératif) qui se repose sur la composition de fonction 
+et n'admet ni la mutation des données ni le changement d'état et les effets de bords.
+Il se manifeste dans java par les Streams & Lambda.
+-----------------
+
+ *  Can you give an example of functional programming?
+-----------------  
+addition : 
+f -> let plus a b = a + b; 
+----------------- 
+
+ *  What is a stream?
+-----------------
+Il s'agit d'un flot de données construit à partir d'une source ( collection, tableau, I/O) et possède les proprietés suivantes:
+- ne stocke pas de données, se contente de les transférer d'une source vers une suite d'opérations
+- ne modifie pas les données de la source sur laquelle il est construit, il construit un nouveau si besoin ( //) 
+- Charge les données en lazy (optimise les perf)
+- N'est pas borné
+- un stream n'est pas réutilisable, une fois parcouru il faut reconstruire un autre s'il le faut.
+-----------------
+ 
+ *  Explain about streams with an example?
+-----------------
+ List<String> strings = Arrays.asList("girafe", "chameau", "chat", "poisson", "cachalot");
+       strings.stream()
+               .filter(x -> x.contains("cha"))
+               .map(x -> x.substring(0, 1).toUpperCase() + x.substring(1))
+               .sorted()
+               .forEach( System.out::println );
+-----------------
+
+ *  What are intermediate operations in streams?
+-----------------
+Les opérations intermédiaires (Stream.map ou Stream.filter par exemple) sont effectuées
+de façon lazy et renvoient un nouveau stream, ce qui crée une succession de streams 
+que l’on appelle stream pipelines.
+-----------------
+
+ *  What are terminal operations in streams?
+-----------------
+Une fois l’opération terminale est faite, tous les streams seront dit consommés, ils seront détruits et ne pourront plus être utilisés.
+-----------------
+
+
+ *  What are method references?
+-----------------
+C'est un raccourci d'une expression lambda executant UNE seule méthode.
+Consumer<String> c = System.out::println;
+-----------------
+
+ *  What are lambda expressions?
+-----------------
+  Les expressions lambda sont aussi nommées closures ou fonctions anonymes : leur but principal est de permettre de passer en paramètre un ensemble de traitements.
+  Elle permet de passer une fonction en paramètre d'une méthode. 
+  il s'agit surtout d'un unnamed block de code ( unnamed function) avec une liste de parametres et un body.
+  concise, anonyme, fonctionelle et passée d'une fonction à une autre.
+  Une lambda n'a pas de nom, n'a pas de type de retour, ne retourne pas d'exception et de type parameters.
+-----------------
+
+
+ *  Can you give an example of lambda expression?
+-----------------
+roster
+    .stream()
+    .filter(
+        p -> p.getGender() == Person.Sex.MALE
+            && p.getAge() >= 18
+            && p.getAge() <= 25)
+    .map(p -> p.getEmailAddress())
+    .forEach(email -> System.out.println(email));
+-----------------
+
+ *  Can you explain the relationship between lambda expression and functional interfaces?
+ *  What is a predicate?
+ 
+ *  What is the functional interface - function?
+-----------------
+C'est une interface qui n'a qu'une seule abstract method.
+il existe 4 catégories :
+Supplier
+Consumer
+Predicate
+Function 
+-----------------
+
+ *  What is a consumer?
+-----------------
+il s'agit dune interface fonctionelle dont la méthode prend un objet et ne retourne rien
+exemple :
+Consumer<T> c = p -> System.out.println(p); 
+----------------- 
+
+ *  Can you give examples of functional interfaces with multiple arguments?
+  
+== New Features
+
+ *  What are the new features in Java 5?
+ *  What are the new features in Java 6?
+ *  What are the new features in Java 7?
+ *  What are the new features in Java 8?
+ *  What are the new features in Java 9?

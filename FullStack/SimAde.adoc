@@ -1,0 +1,66 @@
+* Qu'est ce que la complexité
+
+-----------------
+Un algorithme dépend principalement de deux resources : le temps et l'espace
+
+La complexité algorithmique temporelle  se définit par une fonction qui calcule un ordre de grandeur de
+ce qu'un algorithme va mettre comme temps pour s'exécuter. Il s'agit d'une élavuation 
+asymptotique O(X). X est n au carré si on parle de deux boucles imbriqués.
+
+La complexité spaciale : la quatité de mémoire consommé par un algo. dépend de la taille en entrée
+
+----------------- 
+
+* Citer un algorithme de tri
+
+-----------------
+tri à bulle, par fusion, 
+----------------- 
+
+* Comment choisit'on un 
+
+-----------------
+tout dépend du contexte, de quoi on dispose comme mémoire et surtout du volume de données.
+----------------- 
+
+
+* Qu'est ce que l'AOP ? Comment ça fonctionne ? 
+
+-----------------
+Aspect Oriented Programming
+Gère les aspects "transverses" dans une application
+les concepts de base sont : Advice, JoinPoint .. etc..
+Arrivant à un joinPoint (action/evennement) une advice sera éxècutée 
+type de ADVICE: befre, after, arround.
+
+Exemple : gestion de log d'une application. On 
+----------------- 
+
+
+* Comment fonctionne l'annotation Transactional dans Spring
+
+-----------------
+Quand on appelle une méthode avec une @Transactional. Spring injecte autmatiquement
+des proxy à la place des vrais objets target. Ensuite, Spring, via une implémentation AOP
+il va invoquer un TransactionAdviser qui lui va effectuer le traitement qu'in faut pour
+récupérer le résulat de la transaction et le retourne dans le proxy s'il réussit.
+Sinon, en cas d'execption, Un roll back sera effectué.
+----------------- 
+
+* Quels sont les Design Pattern que vous connaissez ?
+
+-----------------
+GOF : 
+Creational : Builder, Factory, AsbtractFactory..
+Structural : Proxy, Singleton, 
+Behavioural : Observer, State, Iterator
+----------------- 
+
+* Existe-t-il d'autres types de Design pattern ?
+
+-----------------
+des patterns architectural: MVC, IoC ...
+----------------- 
+
+
+

@@ -1,0 +1,82 @@
+
+* What is Hibernate Framework ? 
+-----------------
+c'est un framework ORM qui permet de mapper un "domain model objects" à des tables entités relation. 
+Hibernate est un ORM java
+-----------------
+
+* What is Java Persistence API (JPA)?
+-----------------
+c'est une specification JSR de la gestion des données relationelles.
+-----------------
+
+* What are the important benefits of using Hibernate Framework?
+-----------------
+- La gestion des ressources JDBC
+- La configuration peut se faire en XML ou en annotation ce qui rend le code indépendant de la conf
+- Large communauté
+- Facilement integrable en JEE
+- Offre le lazy initialization via proxy objects
+- Offre le cache pour de meilleures perf
+- Permet aussi d'executer du SQL natif
+-----------------
+
+* Name some important interfaces of Hibernate framework?
+-----------------
+- SessionFactory : immutable, thread-safe. On l'initialise une seule fois. Puis on utilise le cache
+pour la réutiliser. utilisée pour récupérer les sessions des operations sur la bd.
+
+- Session : single-threaded, short-lived NOT THREAD SAFE object. représente une conversation entre l'application et la bd.
+Elle wrappe java.sql.Connection et une factory pour org.hibernate.Transaction.
+Il faut l'ouvrir uniquement si besoin et la fermer tout de suite après.
+
+- Transaction : single-threaded, short-lived object. Utilisé pour exécuter une tâche atomique.
+-----------------
+
+
+* Name some important annotations used for Hibernate mapping?
+-----------------
+- @Entity
+- @Table : used with Entity to define which table
+- @Access: define access type ?
+- @Id 
+- @EmbeddedId : to define composite primary Key in the entity bean
+- @OneToOne, @OneToMany, @ManyToOne, @ManyToMany
+- @Cascade : to define cascadeType between two entities
+- @PrimaryKeyJoinColumn :   ?
+-----------------
+
+* What is hibernate caching? Explain Hibernate first level cache?
+-----------------
+-hibernate caches query data to make our application faster 
+-Hibernate first level cache is associated with the Session object.
+-Hibernate first level cache is session specific : 
+that’s why when we are getting the same data in same session
+ there is no query fired whereas in other session query is fired to load the data.
+-Hibernate first level cache is enabled by default and there is no way to disable it.
+However hibernate provides methods through which we can delete selected objects
+from the cache or clear the cache completely.
+Any object cached in a session will not be visible to other sessions and when the session is closed,
+all the cached objects will also be lost.
+-----------------
+
+* What is second level caching though ? 
+
+-----------------
+second-level cache is SessionFactory-scoped, meaning it is shared by all sessions created with the same session factory. When an entity instance is looked up by its id (either by application logic or by Hibernate internally, e.g. when it loads associations to that entity from other entities), and if second-level caching is enabled for that entity, the following happens:
+
+-If an instance is already present in the first-level cache, it is returned from there
+-If an instance is not found in the first-level cache, and the corresponding instance state is cached in the second-level cache, then the data is fetched from there and an instance is assembled and returned
+Otherwise, the necessary data are loaded from the database and an instance is assembled and returned
+-----------------
+
+
+* How to configure Hibernate Second Level Cache using EHCache?
+-----------------
+
+-----------------
+ 
+
+source :
+
+https://www.journaldev.com/3633/hibernate-interview-questions-and-answers

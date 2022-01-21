@@ -1,0 +1,11 @@
+* Par quoi commencer son application angular ?
+
+- Découper les modules
+- Le routing et la navigation
+- La gestion des erreurs
+- Les framework de tests : jasmin et protractor
+
+
+*  Stratégie CSS & composant  :Les préconisations Angular pour les framework CSS ? 
+
+* RxJS

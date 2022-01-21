@@ -1,0 +1,76 @@
+1) Basics
+a. What is the difference between interface and abstract class?
+
+
+b. Explain the keyword "transient"?
+
+c. What is the difference between a List and a Set?
+
+d. What is the hashcode method? Why override equals? When can we use the double equal (==)?
+
+e. Explain the keyword "final"?
+
+f. Signature of a method: contains what? 
+
+
+
+2) What's New in Java 8
+
+a. On which Java versions did you work? What are
+The new features of the X version?
+
+b. Lambda: applies only to FunctionalInterface,
+Interface with a single abstract method
+
+c. Default method?
+
+
+
+3) Java - concurrency/multithreading
+
+a. Explain the keyword "synchronized"? Where can it be used?
+
+b. What are the two ways to create a Thread? Which
+Privileged? Why ?
+
+
+
+4) REST
+
+at. Explain what REST and RESTful are? What are
+The 3 levels necessary for an API to be considered as
+RESTful?
+
+b. Can you cite the main http verbs usable in
+A REST API?
+
+c. Is a REST API stateless or stateful? Explain why.
+
+
+
+5) Database
+
+a. What is the difference between dbmrs?
+
+b. Joins?
+
+
+
+6) Hibernate
+
+at. Cache level 1/2, proxy? Persistent collections?
+
+b. User type?
+
+c. What is the difference between a sorted collection and a
+ordered Collection ordered in Hibernate?
+
+d. What is Lazy Loading in Hibernate?
+
+
+
+7) General Culture
+
+a. What is a design pattern? Give some examples.
+
+b. What is the last technical book you read?
